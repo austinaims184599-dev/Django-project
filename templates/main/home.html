@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Django Deployment Test{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container text-center">
+        <h1 class="display-4 mb-4">
+            <i class="fas fa-rocket"></i> Django Deployment Test
+        </h1>
+        <p class="lead mb-4">
+            A simple Django project designed for testing deployment scenarios
+        </p>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="alert alert-success" role="alert">
+                    <i class="fas fa-check-circle"></i>
+                    <strong>Deployment Successful!</strong> Your Django application is running correctly.
+                </div>
+            </div>
+        </div>
+        <a href="{% url 'api_status' %}" class="btn btn-light btn-lg">
+            <i class="fas fa-code"></i> Test API
+        </a>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-12">
+                <h2 class="display-5 mb-3">Features</h2>
+                <p class="lead text-muted">This test project includes the following features</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 card-hover">
+                    <div class="card-body text-center">
+                        <i class="fas fa-globe fa-3x text-primary mb-3"></i>
+                        <h5 class="card-title">Web Interface</h5>
+                        <p class="card-text">Modern, responsive web interface built with Bootstrap 5</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 card-hover">
+                    <div class="card-body text-center">
+                        <i class="fas fa-code fa-3x text-success mb-3"></i>
+                        <h5 class="card-title">REST API</h5>
+                        <p class="card-text">Simple REST API endpoints for testing API functionality</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 card-hover">
+                    <div class="card-body text-center">
+                        <i class="fas fa-database fa-3x text-info mb-3"></i>
+                        <h5 class="card-title">Database</h5>
+                        <p class="card-text">SQLite database with sample data models</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Posts Section -->
+{% if posts %}
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="display-5 mb-4 text-center">Sample Posts</h2>
+                <div class="row">
+                    {% for post in posts %}
+                    <div class="col-md-6 mb-4">
+                        <div class="card card-hover">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ post.title }}</h5>
+                                <p class="card-text">{{ post.content|truncatewords:20 }}</p>
+                                <small class="text-muted">
+                                    <i class="fas fa-calendar"></i> {{ post.created_at|date:"M d, Y" }}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% if total_posts > 5 %}
+                <div class="text-center mt-4">
+                    <p class="text-muted">Showing 5 of {{ total_posts }} posts</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- API Testing Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-code"></i> API Testing</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Test the API endpoints to verify deployment functionality:</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a href="{% url 'api_status' %}" class="btn btn-primary w-100 mb-2">
+                                    <i class="fas fa-heartbeat"></i> Status Check
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="{% url 'api_posts' %}" class="btn btn-success w-100 mb-2">
+                                    <i class="fas fa-list"></i> Posts API
+                                </a>
+                            </div>
+                        </div>
+                        <hr>
+                        <h6>Sample API Response:</h6>
+                        <pre class="bg-light p-3 rounded"><code>{
+  "status": "success",
+  "message": "Django deployment test is working!",
+  "version": "1.0.0"
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
