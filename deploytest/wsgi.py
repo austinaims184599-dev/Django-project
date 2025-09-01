@@ -7,10 +7,11 @@ For more information on this file, see
 https://docs.djangoproject.com/en/4.2/howto/deployment/wsgi/
 """
 
-import os
+import os, sys
+project_path = '/home/austinaims/sites/Django-project'
+if project_path not in sys.path:
+    sys.path.append(project_path)
 
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Django-project.settings')
 from django.core.wsgi import get_wsgi_application
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'deploytest.settings')
-
 application = get_wsgi_application()

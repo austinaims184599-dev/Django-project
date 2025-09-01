@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-your-secret-key-here-change-in-production'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']  # For testing deployment - restrict in production
+ALLOWED_HOSTS = ['austinaims.pythonanywhere.com']  # For testing deployment - restrict in production
 
 
 # Application definition
@@ -113,6 +113,7 @@ USE_I18N = True
 
 USE_TZ = True
 
+CSRF_TRUSTED_ORIGINS = ["https://austinaims.pythonanywhere.com"]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -127,3 +128,13 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "austinaims$djangodb",
+        "USER": "austinaims",
+        "PASSWORD": os.environ.get("DB_PASSWORD"),
+        "HOST": "austinaims.mysql.pythonanywhere-services.com",
+    }
+}
